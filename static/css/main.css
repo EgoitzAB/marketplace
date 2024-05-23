@@ -1,0 +1,157 @@
+/* Estilos para templates autenticación */
+
+.myproject-h1 {
+    font-size: 3rem;
+}
+
+.gradient-custom-2 {
+    /* fallback for old browsers */
+    background: #fccb90;
+    /* Chrome 10-25, Safari 5.1-6 */
+    background: -webkit-linear-gradient(to right, #43f82b, #1caa1c, #a9f58b, #eb7121);
+    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    background: linear-gradient(to right,  #43f82b, #026102, #a9f58b, #00a761);
+}
+
+@media (min-width: 768px) {
+    .gradient-form {
+    height: 100vh !important;
+    }
+}
+
+@media (min-width: 769px) {
+    .gradient-custom-2 {
+    border-top-right-radius: .3rem;
+    border-bottom-right-radius: .3rem;
+    }
+}
+
+.form-group {
+        margin-bottom: 1.5rem;
+        display: flex; /* Utiliza flexbox para alinear elementos */
+        flex-direction: column;
+        align-items: center;
+    }
+
+.field-wrapper {
+        position: relative;
+        text-align: center;
+    }
+
+.field-wrapper input {
+        width: 100%; /* O ajusta el ancho según sea necesario */
+        padding: .375rem .75rem; /* O ajusta el relleno según sea necesario */
+        font-size: 1rem; /* O ajusta el tamaño de la fuente según sea necesario */
+        line-height: 1.5; /* O ajusta la altura de línea según sea necesario */
+        color: #32b86a; /* O ajusta el color del texto según sea necesario */
+        background-color: #ffffff; /* O ajusta el color de fondo según sea necesario */
+        background-clip: padding-box;
+        border: 1px solid #0aaa32; /* O ajusta el color del borde según sea necesario */
+        border-radius: .25rem; /* O ajusta el radio del borde según sea necesario */
+        transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out; /* Ajusta la transición según sea necesario */
+    }
+
+.field-wrapper label {
+        margin-bottom: .5rem; /* Ajusta el margen inferior según sea necesario */
+        display: inline-block;
+        font-weight: 700; /* O ajusta el peso de la fuente según sea necesario */
+    }
+
+@media (max-width: 992px) {
+    .field-wrapper input {
+        width: 100%;
+        display: inline-block;
+        text-align: left;
+    }
+}
+
+.btn-block {
+    width: 45%;
+    padding: .375rem .75rem;
+    display: block;
+}
+
+.sin-puntos {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+
+.separator {
+    height: 12vh; /* Grosor del separador en rem */
+    background-color: #ccc; /* Color del separador */
+    opacity: 0;
+}
+
+.separator-category {
+    height: 3rem; /* Grosor del separador en rem */
+    background-color: white; /* Color del separador */
+    opacity: 1;
+}
+
+.carousel-img {
+    width: 300px; /* Ancho deseado */
+    height: 200px; /* Alto deseado */
+    object-fit: cover; /* Asegura que la imagen cubra completamente el espacio */
+}
+
+.video-container {
+    position: relative;
+    width: 100%;
+    padding-bottom: 56.25%; /* Mantén esta proporción para videos 16:9 */
+}
+.video {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+.text-overlay {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 24px;
+    color: white;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+/* Estilo para el contenedor del producto */
+.product {
+    display: inline-block;
+    margin: 10px;
+    text-align: center;
+}
+
+/* Estilo para ocultar el botón de radio visualmente pero mantenerlo interactivo */
+.visually-hidden {
+    position: absolute;
+    clip: rect(0 0 0 0);
+    pointer-events: none;
+}
+
+  /* Estilo para el botón con apariencia de botón */
+.btn {
+    display: inline-block;
+    padding: 5px 10px;
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    cursor: pointer;
+}
+
+  /* Estilo para la etiqueta del botón */
+.btn-label {
+    display: block;
+}
+
+  /* Estilo para el precio */
+.price {
+    display: none;
+    margin-top: 5px; /* Espaciado entre el botón y el precio */
+}
+
+  /* Mostrar el precio cuando el botón está seleccionado */
+.visually-hidden:checked + .btn-label + .price {
+    display: block;
+}

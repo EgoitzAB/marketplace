@@ -1,0 +1,19 @@
+# Entornos virtuales
+venv/
+env/
+
+# Archivos de usuario de VS Code
+.vscode/
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Archivos de configuración locales
+*.sqlite3
+*.pyc
+*.log
+
+# Directorio de migraciones
+/migrations/
