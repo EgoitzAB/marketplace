@@ -39,9 +39,7 @@ def crear_orden(request):
             return redirect(reverse('pago:realizar_compra'))
     else:
         form = OrdenCreateForm()
-    return render(request,
-                'ordenes/orden/crear.html',
-                {'carrito': carrito, 'form': form})
+    return render(request,'ordenes/orden/crear.html', {'carrito': carrito, 'form': form})
 
 
 @staff_member_required

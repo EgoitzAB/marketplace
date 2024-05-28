@@ -1,3 +1,13 @@
+:root {
+    --primary-color: #bfff00;
+    --secondary-color: #2ecc71;
+    --accent-color: #fffb00;
+    --background-color: #ffffff;
+    --text-color: #2c3e50;
+    --black-color: #000000;
+    --orange-color:
+}
+
 /* Estilos para templates autenticación */
 
 .myproject-h1 {
@@ -153,5 +163,154 @@
 
   /* Mostrar el precio cuando el botón está seleccionado */
 .visually-hidden:checked + .btn-label + .price {
+    display: block;
+}
+
+.navbar .navbar-brand {
+    display: flex;
+    align-items: center;
+}
+
+.navbar .navbar-brand img {
+    height: 40px;
+    margin-right: 10px;
+}
+
+/* Estilo para el top-bar y el nav para que tengan el mismo color de fondo */
+.top-bar .logo-container,
+.top-bar .search-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 1rem;
+}
+
+/*** Topbar Start ***/
+.fixed-top {
+    transition: 0.5s;
+    background: var(--primary-color);
+    border: 0;
+}
+
+.topbar {
+    padding: 20px;
+    border-radius: 230px 100px;
+}
+
+.topbar .top-info {
+    font-size: 15px;
+    line-height: 0;
+    letter-spacing: 1px;
+    display: flex;
+    align-items: center;
+}
+
+.topbar .top-link {
+    font-size: 15px;
+    line-height: 0;
+    letter-spacing: 1px;
+    display: flex;
+    align-items: center;
+}
+
+.topbar .top-link a {
+    letter-spacing: 1px;
+}
+
+.topbar .top-link a small:hover {
+    color: var(--primary-color) !important;
+    transition: 0.5s;
+}
+
+.topbar .top-link a small:hover i {
+    color: var(--primary-color) !important;
+}
+/*** Topbar End ***/
+
+/*** Navbar Start ***/
+.navbar .navbar-nav .nav-link {
+    padding: 10px 15px;
+    font-size: 16px;
+    transition: .5s;
+    color: #000 !important;
+}
+
+.navbar {
+    height: 100px;
+    border-bottom: 1px solid rgba(255, 255, 255, .1);
+}
+
+.navbar .navbar-nav .nav-link:hover,
+.navbar .navbar-nav .nav-link.active,
+.fixed-top.bg-white .navbar .navbar-nav .nav-link:hover,
+.fixed-top.bg-white .navbar .navbar-nav .nav-link.active {
+    color: var(--primary-color);
+}
+
+.dropdown-menu {
+    background-color: var(--primary-color) !important; /* Fondo blanco para los dropdowns */
+}
+
+.navbar-collapse {
+    background-color: var(--primary-color) !important;
+}
+/* .navbar .dropdown-toggle::after {
+    border: none;
+    content: "\f078";
+    font-family: "Font Awesome 5 Free";
+    font-weight: 700;
+    vertical-align: middle;
+    margin-left: 8px;
+} */
+
+@media (min-width: 1200px) {
+    .navbar .nav-item .dropdown-menu {
+        display: block;
+        visibility: hidden;
+        top: 100%;
+        transform: rotateX(-75deg);
+        transform-origin: 0% 0%;
+        border: 0;
+        transition: .5s;
+        opacity: 0;
+    }
+}
+
+.dropdown .dropdown-menu a:hover {
+    background: var(--primary-color);
+    color: var(--secondary-color);
+}
+
+.navbar .nav-item:hover .dropdown-menu {
+    transform: rotateX(0deg);
+    visibility: visible;
+    background: var(--primary-color) !important;
+    border-radius: 10px !important;
+    transition: .5s;
+    opacity: 1;
+}
+
+#searchModal .modal-content {
+    background: rgba(var(--accent-color), .8);
+}
+/*** Navbar End ***/
+
+.bg-secondary-color {
+    background-color: var(--secondary-color);
+}
+
+#searchForm {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    width: 300px;
+    padding: 10px;
+    border-radius: 25px; /* Hace que el formulario sea redondo */
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* Añade sombra para mejor estética */
+    background-color: #fff; /* Asegura el fondo blanco */
+    display: none; /* Inicialmente oculto */
+}
+#searchForm.show {
     display: block;
 }

@@ -52,6 +52,7 @@ INSTALLED_APPS = [
     'tienda.apps.TiendaConfig',
     'pago.apps.PagoConfig',
     'orden.apps.OrdenConfig',
+    'core.apps.CoreConfig',
 ]
 
 MIDDLEWARE = [
@@ -82,6 +83,7 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'carrito.context_processors.carrito',
+                'tienda.context_processors.categorias',
             ],
         },
     },
@@ -165,7 +167,8 @@ SITE_ID = 1
 
 ACCOUNT_EMAIL_VERIFICATION = "none"
 ACCOUNT_EMAIL_REQUIRED = True
-LOGIN_REDIRECT_URL = "/"
+LOGIN_REDIRECT_URL = "/perfil/"
+LOGOUT_REDIRECT_URL = "/"
 
 AUTHENTICATION_BACKENDS = [
     # Needed to login by username in Django admin, regardless of `allauth`

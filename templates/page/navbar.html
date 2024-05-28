@@ -1,5 +1,5 @@
 {% load static %}
-
+{% comment %} 
 <!-- Cabecera para móviles con RRSS -->
 <div class="site-mobile-menu site-navbar-target">
   <div class="site-mobile-menu-header">
@@ -10,71 +10,282 @@
   <div class="site-mobile-menu-body"></div>
 </div>
 
-
 <div class="top-bar bg-warning">
   <div class="container">
     <div class="row">
       <div class="col-12">
-        <a href="#" class=""><span class="mr-2  icon-envelope-open-o"></span> <span class="d-none d-md-inline-block">test@tiendaCBD.com</span></a>
+        <a href="#" class=""><span class="mr-2 icon-envelope-open-o"></span> <span class="d-none d-md-inline-block">test@tiendaCBD.com</span></a>
         <span class="mx-md-2 d-inline-block"></span>
-        <a href="#" class=""><span class="mr-2  icon-phone"></span> <span class="d-none d-md-inline-block">943 43 43 43</span></a>
-        <a href="#" class="float-right"><span class="mr-2  icon-twitter"></span> <span class="d-none d-md-inline-block">Twitter</span></a>
+        <a href="#" class=""><span class="mr-2 icon-phone"></span> <span class="d-none d-md-inline-block">943 43 43 43</span></a>
+        <a href="#" class="float-right"><span class="mr-2 icon-twitter"></span> <span class="d-none d-md-inline-block">Twitter</span></a>
         <span class="mx-md-2 d-inline-block"></span>
-        <a href="#" class="float-right"><span class="mr-2  icon-facebook"></span> <span class="d-none d-md-inline-block">Facebook</span></a>
-
+        <a href="#" class="float-right"><span class="mr-2 icon-facebook"></span> <span class="d-none d-md-inline-block">Facebook</span></a>
       </div>
-
     </div>
-
   </div>
 </div>
 
-</div>
-  </div>
-          <!-- Navigation-->
-          <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top mb-0 p-0">
-            <div class="container-fluid px-4 px-lg-5" style="background-color: #bfff00;">
-                <a class="navbar-brand" href="{% url 'tienda:home' %}">La Revolución Verde CBD</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav me-lg-2 mb-2 mb-lg-0 ms-lg-4">
-                        <li class="nav-item"><a class="nav-link active" aria-current="page" href="{% url 'tienda:home'%}">Inicio</a></li>
-                        <li class="nav-item"><a class="nav-link active" aria-current="page" href="{% url 'tienda:listado_producto'%}">Listado de productos</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#!">Sobre nosotros</a></li>
+<nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top mb-0 p-0">
+    <div class="top-bar">
+        <div class="container mt-3">
+            <div class="logo-container">
+                <img src="{% static 'favicon.png' %}" style="width: 50px;" alt="logo">
+                <a class="navbar-brand ms-2" href="{% url 'tienda:home' %}">La Revolución Verde CBD</a>
+            </div>
+            <div class="search-container">
+                <form class="d-flex">
+                    <input class="form-control me-2" type="search" placeholder="Buscar" aria-label="Search">
+                    <button class="btn btn-outline-dark" type="submit"><i class="bi bi-search"></i></button>
+                </form>
+                <a href="{% url 'carrito:carrito_detalle' %}" class="ms-3"><i class="bi bi-cart-fill"></i></a>
+                <a href="{% url 'tienda:perfil' %}" class="ms-3"><i class="bi bi-person-fill"></i></a>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid px-4 px-lg-5" style="background-color: #bfff00;">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-lg-2 mb-2 mb-lg-0 ms-lg-4">
+                <li class="nav-item"><a class="nav-link active" aria-current="page" href="{% url 'tienda:home' %}">Inicio</a></li>
+                <li class="nav-item"><a class="nav-link active" aria-current="page" href="{% url 'tienda:listado_producto' %}">Listado de productos</a></li>
+                <li class="nav-item"><a class="nav-link" href="#!">Sobre nosotros</a></li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Categorías</a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                      <li><a class="dropdown-item" href="{% url 'tienda:listado_producto' %}">Todos los productos</a></li>
-                      <li><hr class="dropdown-divider" /></li>
-                      {% for categoria in categorias %}
-                        <li><a class="dropdown-item" href="{% url 'tienda:listado_producto' %}?categoria={{ categoria.nombre|urlencode }}">{{ categoria.nombre }}</a></li>
-                      {% endfor %}
+                        <li><a class="dropdown-item" href="{% url 'tienda:listado_producto' %}">Todos los productos</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        {% for categoria in categorias %}
+                            <li><a class="dropdown-item" href="{% url 'tienda:listado_producto' %}?categoria={{ categoria.nombre|urlencode }}">{{ categoria.nombre }}</a></li>
+                        {% endfor %}
                     </ul>
-                  </li>
-                </ul>
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item"></li>
-                      <form class="d-flex" action="#">
-                        <button class="btn btn-outline-dark" type="submit">
-                          <i class="bi-cart-fill me-1"></i>
-                          Carrito
-                          <span class="badge bg-dark text-white ms-1 rounded-pill">{{ request.session.carrito|length }}</span>
-                        </button>
-                      </form>
-                    </li>
-                  <li class="nav-item">
+                </li>
+            </ul>
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                  <a href="{% url 'carrito:carrito_detalle' %}">
+                    <button class="btn btn-outline-dark" type="submit">
+                      <i class="bi-cart-fill me-1"></i>
+                      Carrito
+                      <span class="badge bg-dark text-white ms-1 rounded-pill">{{ request.session.carrito|length }}</span>
+                    </button></a>
+                </li>
+                <li class="nav-item">
                     {% if user.is_authenticated %}
-                      <a class="btn btn-success green-button" href="{% url 'account_email' %}">Cambiar e-mail</a>
-                      <a class="btn btn-success green-button" href="{% url 'account_logout' %}" role="button">Logout</a>
+                        <a class="btn btn-success green-button" href="{% url 'tienda:perfil' %}">Perfil</a>
+                        <a class="btn btn-success green-button" href="{% url 'account_email' %}">Cambiar e-mail</a>
+                        <a class="btn btn-success green-button" href="{% url 'account_logout' %}" role="button">Logout</a>
                     {% else %}
-                      <a class="btn btn-success green-button" href="{% url 'account_login' %}" role="button">Entrar</a>
-                      <a class="btn btn-success green-button" href="{% url 'account_signup' %}" role="button">Registrarse</a>
+                        <a class="btn btn-success green-button" href="{% url 'account_login' %}" role="button">Entrar</a>
+                        <a class="btn btn-success green-button" href="{% url 'account_signup' %}" role="button">Registrarse</a>
                     {% endif %}
-                  </li>
-                </ul>
-              </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav> {% endcomment %}
+
+{% comment %} <!-- Top bar -->
+    <div class="container-fluid fixed-top">
+        <div class="container-fluid topbar bg-warning d-none d-lg-block">
+            <div class="d-flex justify-content-between">
+                <div class="top-info ps-2">
+                    <small class="me-3">
+                        <i class="fas fa-map-marker-alt me-2 text-secondary"></i>
+                        <a href="#" class="text-white">123 Street, New York</a>
+                    </small>
+                    <small class="me-3">
+                        <i class="fas fa-envelope me-2 text-secondary"></i>
+                        <a href="#" class="text-white">Email@Example.com</a>
+                    </small>
+                </div>
+                <div class="top-link pe-2">
+                    <a href="#" class="text-white"><small class="text-white mx-2">Privacy Policy</small>/</a>
+                    <a href="#" class="text-white"><small class="text-white mx-2">Terms of Use</small>/</a>
+                    <a href="#" class="text-white"><small class="text-white ms-2">Sales and Refunds</small></a>
+                </div>
             </div>
-          </nav>
         </div>
+
+        <!-- Navbar -->
+        <div class="container px-0">
+            <nav class="navbar navbar-light navbar-expand-xl">
+                <a href="{% url 'tienda:home' %}" class="navbar-brand">
+                    <h1 class="text-black display-6">La Revolución Verde CBD</h1>
+                </a>
+                <button class="navbar-toggler py-2 px-3" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+                    <span class="fa fa-bars text-black"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarCollapse">
+                    <div class="navbar-nav mx-auto">
+                        <a href="{% url 'tienda:home' %}" class="nav-item nav-link active">Inicio</a>
+                        <a href="{% url 'tienda:listado_producto' %}" class="nav-item nav-link">Listado de productos</a>
+                        <a href="#!" class="nav-item nav-link">Sobre nosotros</a>
+                        <div class="nav-item dropdown">
+                            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Categorías</a>
+                            <div class="dropdown-menu m-0 bg-secondary rounded-0">
+                                <a href="{% url 'tienda:listado_producto' %}" class="dropdown-item">Todos los productos</a>
+                                <div class="dropdown-divider"></div>
+                                {% for categoria in categorias %}
+                                <a href="{% url 'tienda:listado_producto' %}?categoria={{ categoria.nombre|urlencode }}" class="dropdown-item">{{ categoria.nombre }}</a>
+                                {% endfor %}
+                            </div>
+                        </div>
+                        <a href="contact.html" class="nav-item nav-link">Contacto</a>
+                    </div>
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item">
+                            <a href="{% url 'carrito:carrito_detalle' %}">
+                                <button class="btn btn-outline-dark" type="submit">
+                                    <i class="bi bi-cart-fill me-1"></i>
+                                    Carrito
+                                    <span class="badge bg-dark text-white ms-1 rounded-pill">{{ request.session.carrito|length }}</span>
+                                </button>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            {% if user.is_authenticated %}
+                                <a class="btn btn-success green-button" href="{% url 'tienda:perfil' %}">Perfil</a>
+                                <a class="btn btn-success green-button" href="{% url 'account_email' %}">Cambiar e-mail</a>
+                                <a class="btn btn-success green-button" href="{% url 'account_logout' %}" role="button">Logout</a>
+                            {% else %}
+                                <a class="btn btn-success green-button" href="{% url 'account_login' %}" role="button">Entrar</a>
+                                <a class="btn btn-success green-button" href="{% url 'account_signup' %}" role="button">Registrarse</a>
+                            {% endif %}
+                        </li>
+                    </ul>
+                </div>
+            </nav>
         </div>
-</header>
+    </div> {% endcomment %}
+
+    <!-- Top bar -->
+    <div class="container-fluid fixed-top" style="top:0px;">
+        <div class="container-fluid topbar bg-warning d-none d-lg-block">
+            <div class="d-flex justify-content-between">
+                <div class="top-info ps-2">
+                    <small class="me-3">
+                        <i class="fas fa-map-marker-alt me-2 text-secondary"></i>
+                        <a href="#" class="text-white">123 Street, New York</a>
+                    </small>
+                    <small class="me-3">
+                        <i class="fas fa-envelope me-2 text-secondary"></i>
+                        <a href="#" class="text-white">Email@Example.com</a>
+                    </small>
+                </div>
+                <div class="top-link pe-2">
+                    <a href="{% url 'core:politica_de_privacidad' %}" class="text-white"><small class="text-white mx-2">Política de privacidad</small>/</a>
+                    <a href="{% url 'core:terminos_de_uso' %}" class="text-white"><small class="text-white mx-2">Términos de uso</small>/</a>
+                    <a href="#" class="text-white"><small class="text-white ms-2">Ventas y devoluciones</small></a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Navbar -->
+        <div class="container px-0">
+            <nav class="navbar navbar-light navbar-expand-xl">
+                <a href="{% url 'tienda:home' %}" class="navbar-brand d-flex align-items-center">
+                    <img src="{% static 'favicon.ico' %}" alt="Logo" class="me-2" style="width: 30px; height: 30px;">
+                    <h1 class="text-black display-6">La Revolución Verde CBD</h1>
+                </a>
+                <button class="navbar-toggler py-2 px-3" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarCollapse">
+                    <div class="navbar-nav mx-auto">
+                        {% for categoria in categorias %}
+                        <div class="nav-item dropdown">
+                            <a href="{% url 'tienda:listado_producto' %}?categoria={{ categoria.nombre|urlencode }}" class="nav-link dropdown-toggle" id="dropdownMenu{{ forloop.counter }}" data-bs-toggle="dropdown" aria-expanded="false">{{ categoria.nombre }}</a>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenu{{ forloop.counter }}">
+                                {% for producto in productos %}
+                                {% if categoria == producto.categoria %}
+                                <li>
+                                    <a class="dropdown-item" href="{% url 'tienda:listado_producto' %}?producto={{ producto.nombre|urlencode }}">{{ producto.nombre }}</a>
+                                </li>
+                                {% endif %}
+                                {% endfor %}
+                            </ul>
+                        </div>
+                        {% endfor %}
+                        <a href="#!" class="nav-item nav-link">Sobre nosotros</a>
+                        <a href="contact.html" class="nav-item nav-link">Contacto</a>
+                    </div>
+                    <ul class="navbar-nav ms-auto">
+                        <!-- Search Icon -->
+                        <li class="nav-item search-container">
+                            <a href="#" class="nav-link" id="searchIcon">
+                                <i class="bi bi-search"></i>
+                                <div id="searchForm" class="container-fluid bg-light show">
+                                    <div class="container">
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <form action="#" method="GET" class="d-flex">
+                                                    <input type="text" class="form-control me-2" name="q" placeholder="Buscar productos...">
+                                                    <button class="btn btn-outline-success" type="submit">Buscar</button>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <!-- Cart Icon -->
+                        <li class="nav-item">
+                            <a href="{% url 'carrito:carrito_detalle' %}" class="nav-link">
+                                <i class="bi bi-cart-fill"></i>
+                                <span class="badge bg-dark text-white ms-1 rounded-pill">{{ request.session.carrito|length }}</span>
+                            </a>
+                        </li>
+                        <!-- User Icon -->
+                        <li class="nav-item dropdown">
+                            {% if not user.is_authenticated %}
+                            <a href="#" class="nav-link dropdown-toggle" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="bi bi-person-circle"></i>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+                                <li><a class="dropdown-item" href="{% url 'account_login' %}">Entrar</a></li>
+                                <li><a class="dropdown-item" href="{% url 'account_signup' %}">Registrarse</a></li>
+                            </ul>
+                            {% else %}
+                            <a href="#" class="nav-link dropdown-toggle" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="bi bi-person-circle"></i>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+                                <li><a class="dropdown-item" href="{% url 'tienda:perfil' %}">Perfil</a></li>
+                                <li><a class="dropdown-item" href="{% url 'account_email' %}">Cambiar e-mail</a></li>
+                                <li><a class="dropdown-item" href="{% url 'account_logout' %}">Logout</a></li>
+                            </ul>
+                            {% endif %}
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+    </div>
+
+
+
+
+<script>
+    document.getElementById('searchIcon').addEventListener('click', function(event) {
+        event.preventDefault();
+        var searchForm = document.getElementById('searchForm');
+        searchForm.classList.toggle('show');
+    });
+
+    document.addEventListener('click', function(event) {
+        var isClickInsideElement = document.getElementById('searchForm').contains(event.target) || document.getElementById('searchIcon').contains(event.target);
+        if (!isClickInsideElement) {
+            document.getElementById('searchForm').classList.remove('show');
+        }
+    });
+
+$(document).ready(function() {
+    $('#search').on('focus', function() {
+        $(this).css('width', '300px');
+    }).on('blur', function() {
+        $(this).css('width', '150px');
+    });
+});
+</script>

@@ -1,4 +1,4 @@
-{% extends "shop/base.html" %}
+{% extends "page/base.html" %}
 {% load static %}
 
 {% block title %}
@@ -89,16 +89,18 @@
     {% endfor %}
   </div>
 {% endif %}
-
+{% comment "" %}
   <p>Apply a coupon:</p>
   <form action="{% url "coupons:apply" %}" method="post">
     {{ coupon_apply_form }}
     <input type="submit" value="Apply">
     {% csrf_token %}
   </form>
+{% endcomment %}
+
   <p class="text-right">
-    <a href="{% url "shop:product_list" %}" class="button
+    <a href="{% url 'tienda:listado_producto' %}" class="button
     light">Continue shopping</a>
-    <a href="{% url "orders:order_create" %}" class="button">Checkout</a>
+    <a href="{% url 'orden:crear_orden' %}" class="button">Checkout</a>
   </p>
 {% endblock %}

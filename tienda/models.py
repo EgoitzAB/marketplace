@@ -2,6 +2,8 @@ from django.db import models
 from django.urls import reverse
 from django.utils.text import slugify
 from django.core.files.base import ContentFile
+from django.conf import settings
+from django.contrib.auth.models import User
 
 
 from PIL import Image
@@ -105,3 +107,15 @@ class ProductoItem(models.Model):
             except Exception as e:
                 print(f"Error al procesar la imagen: {e}")
         super().save(*args, **kwargs)
+
+class Favorito(models.Model):
+    usuario = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    producto = models.ForeignKey(Producto, on_delete=models.CASCADE)
+    agregado = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        unique_together = ('usuario', 'producto')
+        ordering = ['-agregado']
+
+    def __str__(self):
+        return f'{self.usuario} - {self.producto}'

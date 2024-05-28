@@ -12,33 +12,24 @@ Nuestros productos
 {% block navbar %}
 {% include 'page/navbar.html' %}
 {% endblock navbar %}
+
 {% block content %}
-<!-- Nuevo trozo para las opciones -->
 <div class="container mt-5">
   <div class="row">
     <div class="col-md-3">
       <h4>Filtrar por categoría:</h4>
-      <ul class="list-group">
-        <li class="list-group-item">
-          <a href="{% url 'tienda:listado_producto' %}" class="{% if not request.GET.categoria %}active{% endif %}">Todas</a>
-        </li>
-        <li class="list-group-item">
-          <a href="{% url 'tienda:listado_producto' %}?categoria=ROPA" class="{% if request.GET.categoria == 'ROPA' %}active{% endif %}">Ropa</a>
-        </li>
-        <li class="list-group-item">
-          <a href="{% url 'tienda:listado_producto' %}?categoria=FLORES" class="{% if request.GET.categoria == 'FLORES' %}active{% endif %}">Flores</a>
-        </li>
-        <li class="list-group-item">
-          <a href="{% url 'tienda:listado_producto' %}?categoria=COSMÉTICOS" class="{% if request.GET.categoria == 'COSMÉTICOS' %}active{% endif %}">Cosméticos</a>
-        </li>
-        <li class="list-group-item">
-          <a href="{% url 'tienda:listado_producto' %}?categoria=COMESTIBLES" class="{% if request.GET.categoria == 'COMESTIBLES' %}active{% endif %}">Comestibles</a>
-        </li>
-        <li class="list-group-item">
-          <a href="{% url 'tienda:listado_producto' %}?categoria=VARIOS" class="{% if request.GET.categoria == 'VARIOS' %}active{% endif %}">Varios</a>
-        </li>
-        <!-- Agregar más opciones de categorías aquí -->
-      </ul>
+      <form method="get">
+        <div class="form-group">
+          {{ filtro.form.categoria }}
+        </div>
+        <div class="form-group">
+          {{ filtro.form.precio_min }}
+        </div>
+        <div class="form-group">
+          {{ filtro.form.precio_max }}
+        </div>
+        <button type="submit" class="btn btn-primary">Aplicar Filtros</button>
+      </form>
     </div>
     <div class="col-md-9">
       <h2 class="text-center md-4">
@@ -49,37 +40,45 @@ Nuestros productos
         {% endif %}
       </h2>
       <div class="row row-cols-1 row-cols-md-3 g-4">
-        
         {% for product in productos %}
         <div class="col">
           <div class="card card-principal-listado">
             <div class="hover-container">
               <div class="card-body text-center">
-                <h5 class="card-title">{{ product.name }}</h5>
-                {% if product.fotos %}
+                <h5 class="card-title">{{ product.nombre }}</h5>
+                {% if product.imagen %}
                   <a href="{{ product.slug }}">
-                    <img src="{{ product.fotos.url }}" class="card-img-top img-producto" alt="{{ product.name }}">
+                    <img src="{{ product.imagen.url }}" class="card-img-top img-producto" alt="{{ product.nombre }}">
                   </a>
                 {% else %}
                   <img src="{% static 'images/teclado-1725199204.jpeg' %}" class="card-img-top img-producto" alt="{{ product.name }}">
                 {% endif %}
                 <div class="display-hover">
-                  <a href="{% url 'tienda:detalle_producto' product.slug %}">View Product</a>
-                    <button type="submit">Ver producto</button>
-                  </a>
+                  <a href="{% url 'tienda:detalle_producto' product.slug %}">Ver Producto</a>
+                  {% if user.is_authenticated %}
+                    <div id="favorito-{{ product.id }}">
+                      {% if product in user.favoritos.all %}
+                        <button class="btn btn-danger eliminar-favorito" data-producto-id="{{ product.id }}">Eliminar de favoritos</button>
+                      {% else %}
+                        <button class="btn btn-success agregar-favorito" data-producto-id="{{ product.id }}">Agregar a favoritos</button>
+                      {% endif %}
+                    </div>
+                  {% else %}
+                    <a href="{% url 'account_login' %}?next={% url 'tienda:agregar_a_favoritos' product.id %}" class="btn btn-secondary">Inicia sesión para agregar a favoritos</a>
+                  {% endif %}
                 </div>
               </div>
             </div>
           </div>
         </div>
-        
         {% endfor %}
       </div>
     </div>
   </div>
 </div>
-<a href=#>Pagar</a>
 {% endblock content %}
 
 {% block javascript %}
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="{% static 'js/favoritos.js' %}"></script>
 {% endblock javascript %}
