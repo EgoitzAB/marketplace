@@ -300,17 +300,40 @@
     background-color: var(--secondary-color);
 }
 
-#searchForm {
-    position: absolute;
-    top: 100%;
-    right: 0;
-    width: 300px;
-    padding: 10px;
-    border-radius: 25px; /* Hace que el formulario sea redondo */
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* Añade sombra para mejor estética */
-    background-color: #fff; /* Asegura el fondo blanco */
-    display: none; /* Inicialmente oculto */
+@media (min-width: 992px) {
+    .search-container {
+        position: relative;
+    }
+    #searchForm {
+        position: absolute;
+        top: 100%;
+        left: calc(100% + 10px); /* Mueve el formulario a la derecha del icono */
+        width: 300px;
+        padding: 10px;
+        border-radius: 25px; /* Hace que el formulario sea redondo */
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* Añade sombra para mejor estética */
+        background-color: #fff; /* Asegura el fondo blanco */
+        display: none; /* Inicialmente oculto */
+    }
 }
+
+@media (max-width: 991.98px) {
+    .search-container {
+        position: relative;
+    }
+    #searchForm {
+        position: absolute;
+        top: calc(100% + 10px); /* Mueve el formulario arriba del icono */
+        right: 0;
+        width: 0px;
+        padding: 10px;
+        border-radius: 25px; /* Hace que el formulario sea redondo */
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* Añade sombra para mejor estética */
+        background-color: #fff; /* Asegura el fondo blanco */
+        display: none; /* Inicialmente oculto */
+    }
+}
+
 #searchForm.show {
     display: block;
 }

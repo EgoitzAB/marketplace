@@ -216,11 +216,11 @@
                         <li class="nav-item search-container">
                             <a href="#" class="nav-link" id="searchIcon">
                                 <i class="bi bi-search"></i>
-                                <div id="searchForm" class="container-fluid bg-light show">
+                                <div id="searchForm" class="container-fluid bg-light">
                                     <div class="container">
                                         <div class="row">
                                             <div class="col-12">
-                                                <form action="#" method="GET" class="d-flex">
+                                                <form action="#" method="GET" class="d-flex form-inline">
                                                     <input type="text" class="form-control me-2" name="q" placeholder="Buscar productos...">
                                                     <button class="btn btn-outline-success" type="submit">Buscar</button>
                                                 </form>
@@ -273,13 +273,13 @@
         var searchForm = document.getElementById('searchForm');
         searchForm.classList.toggle('show');
     });
-
+{% comment %} 
     document.addEventListener('click', function(event) {
         var isClickInsideElement = document.getElementById('searchForm').contains(event.target) || document.getElementById('searchIcon').contains(event.target);
         if (!isClickInsideElement) {
             document.getElementById('searchForm').classList.remove('show');
         }
-    });
+    }); {% endcomment %}
 
 $(document).ready(function() {
     $('#search').on('focus', function() {

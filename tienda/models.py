@@ -13,7 +13,7 @@ import uuid
 
 class Categoria(models.Model):
     nombre = models.CharField(max_length=200)
-    slug = models.SlugField(editable=False)
+    slug = models.SlugField(max_length=100, unique=True, blank=True, null=True)
 
     class Meta:
         ordering = ['nombre']
@@ -24,20 +24,8 @@ class Categoria(models.Model):
         verbose_name_plural = 'categorias'
 
     def save(self, *args, **kwargs):
-        self.slug = slugify(self.nombre)
-
-        if self.imagen:
-            try:
-                img = Image.open(self.imagen)
-                img = img.resize((800, 600))
-                # Convertir la imagen a formato JPEG
-                buffer = BytesIO()
-                img.save(buffer, format='JPEG')
-                buffer.seek(0)
-                # Sobrescribir la imagen original con la nueva imagen
-                self.imagen = ContentFile(buffer.getvalue())
-            except Exception as e:
-                print(f"Error al procesar la imagen: {e}")
+        if not self.slug:
+            self.slug = slugify(self.nombre)
         super().save(*args, **kwargs)
 
     def __str__(self):
@@ -53,7 +41,7 @@ class Producto(models.Model):
                             related_name='productos',
                             on_delete=models.CASCADE)
     nombre = models.CharField(max_length=200)
-    slug = models.SlugField(editable=False)
+    slug = models.SlugField(max_length=100, unique=True, blank=True, null=True, editable=True)
     imagen = models.ImageField(upload_to='productos/%Y/%m/%d',
                             blank=True)
     descripcion = models.TextField(blank=True)
@@ -75,7 +63,8 @@ class Producto(models.Model):
         return self.nombre
 
     def save(self, *args, **kwargs):
-        self.slug = slugify(self.nombre)
+        if not self.slug:
+            self.slug = slugify(self.nombre)
         super().save(*args, **kwargs)
 
     def get_absolute_url(self):
@@ -90,9 +79,13 @@ class ProductoItem(models.Model):
     sku = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)
     imagen = models.ImageField(upload_to='productos/%Y/%m/%d', blank=True)
     slug = models.SlugField(editable=False)
+    talla = models.CharField(max_length=15, blank=True, null=True)
+    disponibilidad = models.BooleanField(default=True)
 
     def save(self, *args, **kwargs):
-        self.slug = slugify(f"{self.producto.nombre}-{self.peso}")
+        if not self.slug:
+            self.slug = slugify(f"{self.producto.nombre}-{self.peso}")
+        super().save(*args, **kwargs)
 
         if self.imagen:
             try:

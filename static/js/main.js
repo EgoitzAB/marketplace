@@ -15,7 +15,7 @@
             } else {
                 $('.fixed-top').removeClass('shadow').css('top', 0);
             }
-        } 
+        }
     });
 
    // Back to top button

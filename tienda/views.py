@@ -9,25 +9,26 @@ from django.views.decorators.cache import cache_control
 from django.conf import settings
 from carrito.forms import CarritoAñadirProductoForm
 from .recomendador import Recomendador
-from .filtro import FiltroProducto
+from .filtro import ProductoFilter
 from django.contrib.auth.decorators import login_required
 from orden.models import Orden
 from django.utils.decorators import method_decorator
 
-# Create your views here.
-class PrincipalView(View):
-    def get(self, request):
-        productos = Producto.objects.filter(disponibilidad=True).order_by('categoria')
-        categorias_con_productos = {}
-        for producto in productos:
-            if producto.categoria not in categorias_con_productos:
-                categorias_con_productos[producto.categoria] = []
-            categorias_con_productos[producto.categoria].append(producto)
-        context = {
-            'categorias_con_productos': categorias_con_productos,
-            'productos': productos,
-        }
-        return render(request, 'tienda/index.html', context)
+class PrincipalView(ListView):
+    model = Producto
+    template_name = 'tienda/index.html'
+    context_object_name = 'productos'
+    paginate_by = 10
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        filter = ProductoFilter(self.request.GET, queryset=queryset)
+        return filter.qs
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['filter'] = ProductoFilter(self.request.GET, queryset=self.get_queryset())
+        return context
 
 
 class CategoriasView(ListView):

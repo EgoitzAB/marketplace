@@ -19,6 +19,8 @@ class ProductoAdmin(admin.ModelAdmin):
     search_fields = ('nombre', 'categoria__nombre')
     list_filter = ('disponibilidad', 'categoria', 'creado', 'modificado')
     prepopulated_fields = {'slug': ('nombre',)}
+    fields = ('nombre', 'slug', 'categoria', 'descripcion', 'disponibilidad', 'imagen')
+    exclude = ('creado', 'modificado')
 
 @admin.register(ProductoItem)
 class ProductoItemAdmin(admin.ModelAdmin):

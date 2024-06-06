@@ -47,13 +47,17 @@ INSTALLED_APPS = [
     'phonenumber_field', # autenticación para telefonos
     'django_filters',
     'anymail', # integración de emails con django-anymail
-
+    'crispy_forms',
+    'crispy_bootstrap5',
     'carrito.apps.CarritoConfig',
     'tienda.apps.TiendaConfig',
     'pago.apps.PagoConfig',
     'orden.apps.OrdenConfig',
     'core.apps.CoreConfig',
 ]
+
+CRISPY_TEMPLATE_PACK = 'bootstrap5'
+CRISPY_ALLOWED_TEMPLATE_PACKS = 'bootstrap5'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
