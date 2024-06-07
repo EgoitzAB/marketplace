@@ -46,7 +46,7 @@ class CategoriasView(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         # Aplicar el filtro
-        filtro = FiltroProducto(self.request.GET, queryset=ProductoItem.objects.all())
+        filtro = ProductoFilter(self.request.GET, queryset=ProductoItem.objects.all())
         context['filtro'] = filtro
         return context
 
